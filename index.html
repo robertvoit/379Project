@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Test Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="floating-panel">
+      <button id="drop" onclick="drop()">Display Markers</button>
+      <button id="drop" onclick="change()">Forward A Day</button>
+      <button id="drop" onclick="changeBack()">Back A Day</button>
+    </div>
+    <div id="map"></div>
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 40.607047, lng: -75.37754},
+          zoom: 17
+          
+        });
+        
+        var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+        var beachMarker = new google.maps.Marker({
+          position: {lat: 40.607047, lng: -75.37754},
+          properties: {name: 'Lehigh'},
+          map: map,
+          icon: image
+        });
+    }
+    
+    var contentString = [
+            ['<div id="content1">'+
+            '<div id="siteNotice1">'+
+            '</div>'+
+            '<h1 id="firstHeading1" class="firstHeading1">Packard</h1>'+
+            '<div id="bodyContent1">'+
+            '<p>No events planned today</p>' +
+            '</div>'+
+            '</div>' ,
+            '<div id="content2">'+
+            '<div id="siteNotice2">'+
+            '</div>'+
+            '<h1 id="firstHeading2" class="firstHeading2">Alumni Memorial</h1>'+
+            '<div id="bodyContent2">'+
+            '<p>No events planned today</p>' +
+            '</div>'+
+            '</div>',
+            '<div id="content3">'+
+            '<div id="siteNotice3">'+
+            '</div>'+
+            '<h1 id="firstHeading3" class="firstHeading3">Lindy</h1>'+
+            '<div id="bodyContent3">'+
+            '<p>No events planned today</p>' +
+            '</div>'+
+            '</div>',
+            '<div id="content4">'+
+            '<div id="siteNotice4">'+
+            '</div>'+
+            '<h1 id="firstHeading4" class="firstHeading4">UC</h1>'+
+            '<div id="bodyContent4">'+
+            '<p>No events planned today</p>' +
+            '</div>'+
+            '</div>'],
+            ['<div id="content1">'+
+            '<div id="siteNotice1">'+
+            '</div>'+
+            '<h1 id="firstHeading1" class="firstHeading1">Zoellener</h1>'+
+            '<div id="bodyContent1">'+
+            '<p>No events planned today</p>' +
+            '</div>'+
+            '</div>' ,
+            '<div id="content2">'+
+            '<div id="siteNotice2">'+
+            '</div>'+
+            '<h1 id="firstHeading2" class="firstHeading2">Taylor</h1>'+
+            '<div id="bodyContent2">'+
+            '<p>No events planned today</p>' +
+            '</div>'+
+            '</div>',
+            '<div id="content3">'+
+            '<div id="siteNotice3">'+
+            '</div>'+
+            '<h1 id="firstHeading3" class="firstHeading3">Steps</h1>'+
+            '<div id="bodyContent3">'+
+            '<p>No events planned today</p>' +
+            '</div>'+
+            '</div>',
+            '<div id="content4">'+
+            '<div id="siteNotice4">'+
+            '</div>'+
+            '<h1 id="firstHeading4" class="firstHeading4">Williams</h1>'+
+            '<div id="bodyContent4">'+
+            '<p>No events planned today</p>' +
+            '</div>'+
+            '</div>']
+    ];
+    
+    var buildings = [
+        [{lat: 40.607801, lng: -75.378957},
+        {lat: 40.606076, lng: -75.378217},
+        {lat: 40.606644, lng: -75.376972},
+        {lat: 40.606791, lng: -75.380148}],
+        [
+        {lat: 40.607874, lng: -75.372525},
+        {lat: 40.607239, lng: -75.374059},
+        {lat: 40.608379, lng: -75.378587},
+        {lat: 40.606709, lng: -75.375561}]
+         ];
+    
+    var on = 0;
+    var init = 0;
+    var infoWindow;
+    var markers = [];
+    var buildingCount = 0;
+    
+    function change(){
+        if(buildingCount < buildings.length -1){
+            clearMarkers();
+            markers = [];
+            buildingCount++;
+            init = 0;
+        }
+        else{
+            alert("No more days in calendar");
+        }
+        
+    }
+     function changeBack(){
+        if(buildingCount > 0){
+            clearMarkers();
+            markers = [];
+            buildingCount--;
+            init = 0;
+        }
+        else{
+            alert("No more days in calendar");
+        }
+        
+    }
+    
+    function initMarkers(){
+        for (var i = 0; i < buildings[buildingCount].length; i++) {
+                //addMarker(buildings[i]);
+                markers.push(new google.maps.Marker({
+                position: buildings[buildingCount][i],
+                map: map,
+                animation: google.maps.Animation.DROP,
+                info: contentString[buildingCount][i]
+                }));
+                
+                infoWindow = new google.maps.InfoWindow({ content: contentString[buildingCount][i] });
+                google.maps.event.addListener( markers[i], 'click', function() {
+
+                    infoWindow.setContent( this.info );
+                    infoWindow.open( map, this );
+
+                 });
+                /*
+                infowindow.push(new google.maps.InfoWindow({
+                    content: contentString[i]
+                }));*/
+                //infowindow[i].open(map);
+            }
+        }
+       /* 
+    if(init === 1){    
+        for(var i = 0; i < markers.length; i++){
+                google.maps.event.addListener(markers[i],'click', function() {
+                    //this.setTitle(contentString[i]);
+                    infowindow[i].open(map, this); //causing problems, find another way to do it
+             });
+     }*/
+    
+    function drop() {
+        if(init === 0){
+            initMarkers();
+            init = 1;
+        }
+        if(on === 0){
+           for (var i = 0; i < markers.length; i++) {
+                markers[i].setMap(map);
+            }
+           on = 1;
+        }
+        else{
+            clearMarkers();
+            on = 0;
+        }
+      }
+      /*
+      function addMarker(position) {
+          markers.push(new google.maps.Marker({
+            position: position,
+            map: map,
+            animation: google.maps.Animation.DROP
+          }));
+      }*/
+
+      function clearMarkers() {
+        for (var i = 0; i < markers.length; i++) {
+          markers[i].setMap(null);
+        }
+        //markers = [];
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBAVt6he3nCILEJLJw3ea69qU8Sns3p_tc&callback=initMap"
+    async defer></script>
+  </body>
+</html>

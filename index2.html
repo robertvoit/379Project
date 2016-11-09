@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
     <title>Test Map</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
@@ -30,6 +31,9 @@
         line-height: 30px;
         padding-left: 10px;
       }
+      #dateBox{
+          font-size: medium;
+      }
       #head{
         background-color: #341c07;
         text-align: left;
@@ -54,11 +58,12 @@
         overflow-y: auto;
       }
       #textbox{
+          margin-left: 4px;
           margin-top: 45px;
           overflow-y: auto;
       }
       #logo{
-          margin-top: 7px;
+        margin-top: 7px;
         margin-left: 6px;
       }
       #container{
@@ -67,13 +72,11 @@
     </style>
   </head>
   <body>
+    <script type="text/javascript" language="javascript" src="events.json"></script> 
     <script type="text/javascript" src="./mapscript.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBAVt6he3nCILEJLJw3ea69qU8Sns3p_tc&callback=initMap"
     async defer></script>
     
-        
-        
-       
     
     <div id="map"></div>
     <div id = "container">
@@ -82,12 +85,13 @@
     </div>
     <div id ="right-panel">
         <div id ="textbox">
-            
+            No Events to Display
         </div>
         
     </div>
     </div>
     <div id="floating-panel">
+        <div id ="dateBox"></div>
         <table>
             <tr><td><button id="drop" onclick="drop()">Display Markers</button></td></tr>
             <tr><td><button id="drop" onclick="change()">Forward A Day</button></td></tr>

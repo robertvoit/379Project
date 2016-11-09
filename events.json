@@ -1,0 +1,61 @@
+{
+    "jsonEvents":[
+    {
+        "name":"Bingo",
+        "location":"Packard",
+        "description":"Bingo Night",
+        "category":"Entertainment",
+        "date":"2016-10-25T17:30:00"
+    },
+    {
+        "name":"Musical",
+        "location":"Zoellener",
+        "description":"School Production",
+        "category":"University Events",
+        "date":"2016-10-25T19:30:00"
+    },
+    {
+        "name":"Alumni Meeting",
+        "location":"Alumni Memorial",
+        "description":"Dinner",
+        "category":"Fundraising",
+        "date":"2016-10-26T18:00:00"
+    },
+    {
+        "name":"Google Meeting",
+        "location":"Packard",
+        "description":"Company Info Session",
+        "category":"Recruiting",
+        "date":"2016-10-26T15:00:00"
+    },
+    {
+        "name":"Class Meeting",
+        "location":"Packard",
+        "description":"Info Session",
+        "category":"Recruiting",
+        "date":"2016-10-26T15:00:00"
+    },
+    {
+        "name":"Meeting",
+        "location":"Packard",
+        "description":"Session",
+        "category":"Recruiting",
+        "date":"2016-10-26T15:00:00"
+    },
+    {
+        "name":"Music Show",
+        "location":"Packard",
+        "description":"Battle of the Bands",
+        "category":"University Events",
+        "date":"2016-10-26T19:00:00"
+        
+    },
+    {
+        "name":"Swim Meet",
+        "location":"Taylor",
+        "description":"Lehigh vs. Laf",
+        "category":"Sports",
+        "date":"2016-10-25T15:30:00"
+    }
+]
+}
